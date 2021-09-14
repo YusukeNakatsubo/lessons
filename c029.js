@@ -38,9 +38,9 @@ reader.on('close', () => {
   }
   // 降水確率の最小値を求める
   const MIN_WEATHER = COMPARISON_WEATHERS.reduce((a,b) => {
-    return Math.min(a,b);
+    return Math.min(a,b)
   })
-  const MIN_WEATHER_INDEX = COMPARISON_WEATHERS.indexOf(MIN_WEATHER);
+  const MIN_WEATHER_INDEX = COMPARISON_WEATHERS.indexOf(MIN_WEATHER)
   const STRAT_DATE = HOLDAYS_ARY[0] + MIN_WEATHER_INDEX
   const END_DATE = HOLDAYS_ARY[0] + MIN_WEATHER_INDEX + PERIODS - 1
   console.log(`${STRAT_DATE} ${END_DATE}`)
