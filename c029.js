@@ -16,7 +16,6 @@ reader.on('close', () => {
   // 連休期間数,日程期間数
   const HOLDAYS = TRAVELL_DAYS[0]
   const PERIODS = TRAVELL_DAYS[1]
-  // 連休期間
   // 連休期間中の天気
   const HOLDAYS_ARY = []
   const WEATHERS_ARY = []
