@@ -1,3 +1,4 @@
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
@@ -10,70 +11,55 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  const ALL_DATA = lines
+  const INPUTS = lines
 
-  // 都市数
-  const CITY_COUNT = ALL_DATA[0];
-
-  // 投稿場所,日時
-  const POST_DATA = ALL_DATA.slice(-1)[0];
-  const TIMESTAMP = POST_DATA.split(/\s/);
-  const TIMESTAMP_ARY = TIMESTAMP[1].split(':');
-
-  // 基準となる時間
-  const STANDARD_HOUR = Number(TIMESTAMP_ARY[0]);
-  const STANDARD_MINITE = TIMESTAMP_ARY[1];
-
-  // 基準となる都市を取得
-  const TIMELAG_ARY = POST_DATA.split(/\s/);
-  const STANDARD_CITY = TIMELAG_ARY[0];
-
-  // 各都市を取得 各時差を取得
-  const CITYS_ARY = [];
-  const TIMELAGS_ARY = [];
-  for (let i = 1; i < ALL_DATA.length - 1; i += 1) {
+  // every citys / every lags
+  const TIMEZONE_CITYS = [];
+  const TIMEZONE_LAGS = [];
+  for (let i = 1; i < INPUTS.length - 1; i += 1) {
     let tmp = [];
-    tmp = ALL_DATA[i].split(/\s/);
-    CITYS_ARY.push(tmp[0]);
-    TIMELAGS_ARY.push(Number(tmp[1]));
+    tmp = INPUTS[i].split(/\s/);
+    TIMEZONE_CITYS.push(tmp[0]);
+    TIMEZONE_LAGS.push(Number(tmp[1]));
   }
+  // console.log(TIMEZONE_CITYS);
+  // console.log(TIMEZONE_LAGS);
 
-  // 配列内に基準となる都市が含まれていないか
-  const STANDARD_CITY_POSITION = CITYS_ARY.indexOf(STANDARD_CITY) + 1;
-  const STANDARD_CITY_ARY = ALL_DATA[STANDARD_CITY_POSITION].split(/\s/);
-  const STANDARD_CITY_TIME = Number(STANDARD_CITY_ARY[1]);
+  const POST_DATA = INPUTS.slice(-1)[0];
+  const POST_TMP = POST_DATA.split(/\s/);
+  // base city
+  const BASE_CITY = String(POST_TMP[0].split(':'));
+  // base time
+  const TIMESTAMP = POST_TMP[1].split(':');
+  const BASE_HOUR = Number(TIMESTAMP[0]);
+  const BASE_MINITE = TIMESTAMP[1];
+  // console.log(BASE_CITY);
+  // console.log(BASE_HOUR);
+  // console.log(BASE_MINITE);
 
-  // 各都市の時差を調整する
-  const CONVERT_TIME_LAG = [];
-  let tmp = 0;
-  for (let i = 0; i < TIMELAGS_ARY.length; i+= 1) {
-    // 基準となる都市と時間が一致
-    if (CITYS_ARY[i] === STANDARD_CITY) {
-      tmp = Math.abs(STANDARD_HOUR + TIMELAGS_ARY[i] - STANDARD_CITY_TIME);
-    } else if (Math.sign(TIMELAGS_ARY[i]) === 0) {
-      tmp = Math.abs(STANDARD_HOUR + TIMELAGS_ARY[i] - STANDARD_CITY_TIME);
-    } else if (Math.sign(TIMELAGS_ARY[i]) === 1) {
-      tmp = STANDARD_HOUR + TIMELAGS_ARY[i] - STANDARD_CITY_TIME;
-      if (Math.sign(tmp) === -1) { tmp+= 24; }
-      tmp = Math.abs(tmp)
-    } else if (Math.sign(TIMELAGS_ARY[i]) === -1) {
-      tmp = STANDARD_HOUR + TIMELAGS_ARY[i] - STANDARD_CITY_TIME;
-      if (Math.sign(tmp) === -1) { tmp+= 24; }
-      tmp = Math.abs(tmp)
-    }
-    // 桁調整
+  // standard hour
+  const STANDARD_CITY_TMP = TIMEZONE_CITYS.indexOf(BASE_CITY) + 1;
+  const STANDARD_CITY = INPUTS[STANDARD_CITY_TMP].split(/\s/);
+  const STANDARD_CITY_TIME = Number(STANDARD_CITY[1]);
+  // (現地時間 - 現地時間の時差) % 24 -> 基準時間
+  // ex (19 - 7) % 24 -> 12
+  const STANDARD_HOUR = (BASE_HOUR - STANDARD_CITY_TIME) % 24;
+  // console.log(STANDARD_HOUR);
+
+  // calculate lags
+  const OUTPUTS = []
+  TIMEZONE_LAGS.forEach((lags) => {
+    // (基準時間 + タイムラグ) % 24 -> 現地時間
+    // ex (12 + 7) % 24 -> 19
+    let tmp = (STANDARD_HOUR + lags) % 24;
+    // 負の値の場合 24 加算する
+    if (Math.sign(tmp) === -1) { tmp += 24; }
     tmp = String(tmp);
-    if (tmp.length < 2) { tmp = `0${tmp}` }
-    CONVERT_TIME_LAG.push(tmp);
-  }
+    if (tmp.length < 2) { tmp = `0${tmp}`; }
+    let newTime = `${tmp}:${BASE_MINITE}`;
+    OUTPUTS.push(newTime)
+  })
 
-  // 出力用データの作成
-  const POST_DATAS = []
-  for (let i = 0; i < CONVERT_TIME_LAG.length; i+= 1) {
-    let tmp = `${CONVERT_TIME_LAG[i]}:${STANDARD_MINITE}`
-    POST_DATAS.push(tmp)
-  }
-
-  // 出力
-  console.log(POST_DATAS.join('\n'))
+  // output
+  console.log(OUTPUTS.join('\n'))
 });
