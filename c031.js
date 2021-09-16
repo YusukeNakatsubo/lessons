@@ -11,7 +11,7 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  const INPUTS = lines
+  const INPUTS = lines;
 
   // every citys / every lags
   const TIMEZONE_CITYS = [];
@@ -61,5 +61,5 @@ reader.on('close', () => {
   })
 
   // output
-  console.log(OUTPUTS.join('\n'))
+  console.log(OUTPUTS.join('\n'));
 });
