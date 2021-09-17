@@ -1,0 +1,5 @@
+Array.from()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+
+charCodeAt()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
