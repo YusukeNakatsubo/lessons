@@ -3,3 +3,9 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Ar
 
 charCodeAt()
 https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
+
+String.fromCharCode()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode
+
+文字列とUnicode
+https://jsprimer.net/basic/string-unicode/

@@ -1,27 +1,34 @@
-// This is a code with a 50% pass rate.
-// I don't know what caused it. ...
+// This is a code with a 100% pass rate.
 const INPUT = lines;
 const ENCRYPTION_COUNT = Number(INPUT[0]);
 const ENCRYPTION_LINE = INPUT[1];
 //
-const STANDARD_LINE = String.fromCharCode(...Array.from({length: 26}, (_,i) => 'A'.charCodeAt(0) + i));
-//
-const TMP_ENCRYPTION_LINE = ENCRYPTION_LINE.split('');
 const DECRYPYION_LINE = [];
-for (let i = 0; i < TMP_ENCRYPTION_LINE.length; i += 1) {
-  let tmp = STANDARD_LINE.indexOf(TMP_ENCRYPTION_LINE[i]);
-  while (tmp < 26) {
-    if (tmp < 26 ) { break; }
-    tmp -= 26;
+for (let i = 0; i < ENCRYPTION_LINE.length; i += 1) {
+  let tmp = 0;
+  if ((i + 1) % 2 === 1) { // odd
+    tmp = ENCRYPTION_COUNT * -1;
+  } else { // even
+    tmp = ENCRYPTION_COUNT;
   }
-  if (i % 2 === 0) {
-    tmp -= ENCRYPTION_COUNT;
-    if (tmp < 0) { tmp += 26; }
-  } else if (i % 2 !== 0) {
-    tmp += ENCRYPTION_COUNT;
-    if (tmp > 26) { tmp -= 26}
+  // encode by unicode
+  let tmpFromCharCode = ENCRYPTION_LINE[i].codePointAt() + tmp;
+  const TMP_A = 'A'.codePointAt();
+  const TMP_Z = 'Z'.codePointAt();
+  // tmpFromCharCode < TMP_A
+  if (tmpFromCharCode < TMP_A) {
+    // Counting from Z
+    let tmp = String.fromCodePoint(TMP_Z - (TMP_A - tmpFromCharCode - 1))
+    DECRYPYION_LINE.push(tmp)
+  // tmpFromCharCode > TMP_Z
+  } else if (tmpFromCharCode > TMP_Z) {
+    // Counting from A
+    let tmp = String.fromCodePoint(TMP_A + (tmpFromCharCode - TMP_Z - 1))
+    DECRYPYION_LINE.push(tmp)
+  } else {
+  // others
+    DECRYPYION_LINE.push(String.fromCodePoint(tmpFromCharCode))
   }
-  DECRYPYION_LINE.push(STANDARD_LINE[tmp])
 }
 //
 console.log(DECRYPYION_LINE.join(''));
