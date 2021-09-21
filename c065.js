@@ -18,12 +18,12 @@ for (let i = 0; i < ENCRYPTION_LINE.length; i += 1) {
   // tmpFromCharCode < TMP_A
   if (tmpFromCharCode < TMP_A) {
     // Counting from Z
-    let tmp = String.fromCodePoint(TMP_Z - (TMP_A - tmpFromCharCode - 1))
+    let tmp = String.fromCodePoint(TMP_Z - (TMP_A - tmpFromCharCode - 1));
     DECRYPYION_LINE.push(tmp)
   // tmpFromCharCode > TMP_Z
   } else if (tmpFromCharCode > TMP_Z) {
     // Counting from A
-    let tmp = String.fromCodePoint(TMP_A + (tmpFromCharCode - TMP_Z - 1))
+    let tmp = String.fromCodePoint(TMP_A + (tmpFromCharCode - TMP_Z - 1));
     DECRYPYION_LINE.push(tmp)
   } else {
   // others
