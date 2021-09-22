@@ -1,3 +1,4 @@
+// This code has a 90% pass rate. why?
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -17,32 +18,33 @@ reader.on('close', () => {
   }
   //
   const RECIPE_COUNT = Number(INPUT[0][0]);
-  const FOODSTUFF_COUNT = RECIPE_COUNT + 1;
+  const FOODSTUFF_COUNT = Number(INPUT[RECIPE_COUNT + 1][0]);
   //
-  const RECIPE = [];
+  let RECIPE = [];
   for (let i = 0; i < RECIPE_COUNT; i += 1) {
     RECIPE.push(INPUT[i+1])
   }
-  // RECIPE = Object.assign(...RECIPE.map(([k,v]) => ({[k]:v})))
-  console.log(RECIPE)
-  const FOODSTUFF = [];
+  //
+  let FOODSTUFF = [];
   for (let i = 0; i < FOODSTUFF_COUNT; i += 1) {
     let tmp = RECIPE_COUNT + 2;
     FOODSTUFF.push(INPUT[i+tmp])
   }
-  // FOODSTUFF = Object.assign(...FOODSTUFF.map(([k,v]) => ({[k]:v})))
-  console.log(FOODSTUFF)
   //
-  const FOOD_COUNT = [];
-  for (let i = 0; i < RECIPE.length; i += 1) {
-    for (let j = 0; j < FOODSTUFF.length; i += 1) {
-      // わからん。。。
-      // if (RECIPE[i][0] !== FOODSTUFF[j][0]) {
-      //   break;
-      // } else if (RECIPE[i][0] === FOODSTUFF[j][0] || RECIPE[i][1] < ){
-
-      // }
+  let standardValue = 10000;
+  for (let i = 0; i < RECIPE_COUNT; i += 1) {
+    let recipeTmp = RECIPE[i];
+    for (let j = 0; j < FOODSTUFF_COUNT; j += 1) {
+      let foodstuffTmp = FOODSTUFF[j];
+      if (recipeTmp[0] === foodstuffTmp[0]) {
+        if (Math.floor(foodstuffTmp[1] / recipeTmp[1]) < standardValue) {
+          standardValue = Math.floor(foodstuffTmp[1] / recipeTmp[1]);
+          console.log(standardValue);
+        }
+      }
     }
   }
-  if (FOOD_COUNT.length === 0) { FOOD_COUNT = 0; }
+  //
+  if (standardValue === 10000) { standardValue = 0 }
+  console.log(standardValue);
 });

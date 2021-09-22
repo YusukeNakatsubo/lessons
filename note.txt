@@ -9,3 +9,12 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/St
 
 文字列とUnicode
 https://jsprimer.net/basic/string-unicode/
+
+Object.entries()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+
+Array.prototype.includes()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+
+Object.prototype.hasOwnProperty()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
