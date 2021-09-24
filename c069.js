@@ -1,4 +1,4 @@
-// This code is error.
+// This code has a 50% pass rate. why?
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -10,7 +10,6 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  //
   const THIS = lines[0].split(/\s/).map(Number);
   const THIS_YEAR = Number(THIS[0]);
   const THIS_MONTH = Number(THIS[1]);
@@ -20,50 +19,45 @@ reader.on('close', () => {
   const NEXT_MONTH = Number(NEXT[0]);
   const NEXT_DAY = Number(NEXT[1]);
   //
-  // 開催年されるか否か
-  // 年の計算 -> 一年は181日
-  const DAYS = (15 * 6) + (13 * 7);
-  let standardYear = 0;
-  if (THIS_YEAR % 4 === 0) {
-    standardYear = 0;
+  let NEXY_YEAR = 0;
+  if (THIS_YEAR % 4 === 2) {
+    NEXY_YEAR = THIS_YEAR + 3;
+  } else if (THIS_YEAR % 4 === 3) {
+    NEXY_YEAR = THIS_YEAR + 2;
+  } else if (THIS_YEAR % 4 === 0) {
+    NEXY_YEAR = THIS_YEAR + 1;
   } else {
-    let tmp = THIS_YEAR % 4;
-    tmp *= DAYS
-    standardYear += tmp;
+    return;
   }
-//   console.log(standardYear);
-
-  // 月の計算
-  let standardMonth = 0;
-  let remnantMonth = 13 - THIS_MONTH;
-  if (remnantMonth % 2 === 0) {
-    let tmp = remnantMonth / 2
-    standardMonth = (15 * tmp) + (13 * tmp)
+  const DAYS_PER_YEAR = (15 * 6) + (13 * 7);
+  const standardYear = (NEXY_YEAR - (THIS_YEAR + 1)) * DAYS_PER_YEAR;
+  //
+  let remnantThisMonth = 13 - THIS_MONTH;
+  let remnantThisMonthDays = 0;
+  if (remnantThisMonth % 2 === 0) {
+    let tmp = remnantThisMonth / 2
+    remnantThisMonthDays = (15 * tmp) + (13 * tmp);
   } else {
-    let tmp = Math.floor(remnantMonth / 2)
-    standardMonth = (15 * tmp) + (13 * tmp) + 13
+    let tmp = Math.floor(remnantThisMonth / 2);
+    remnantThisMonthDays = (15 * tmp) + (13 * tmp) + 13;
   }
-//   console.log(standardMonth);
-  let nextRemnantMonth = NEXT_MONTH;
-  if (nextRemnantMonth !== 1) {
-    if (remnantMonth % 2 === 0) {
-      let tmp = nextRemnantMonth / 2
-      standardMonth = (15 * tmp) + (13 * tmp)
-    } else {
-      let tmp = Math.floor(nextRemnantMonth / 2)
-      standardMonth = (15 * tmp) + (13 * tmp) + 13
-    }
-  }
-//   console.log(standardMonth);
-
-  // 日の計算
-  let standardDay = 0;
+  //
+  let remnantNextMonth = NEXT_MONTH;
+  let remnantNextMonthDays = 0;
+  let remnantNextMonthTmp = Math.floor(remnantNextMonth / 2);
+  remnantNextMonthDays = (15 * remnantNextMonthTmp) + (13 * remnantNextMonthTmp);
+  const standardMonth = remnantThisMonthDays + remnantNextMonthDays;
+  //
+  let remnantThisDayDays = 0;
   if (THIS_MONTH % 2 === 0) {
-    standardDay = 15 - THIS_DAY + NEXT_DAY;
+    let tmp = 15 - THIS_DAY;
+    remnantThisDayDays = tmp;
   } else {
-    standardDay = 13 - THIS_DAY + NEXT_DAY;
+    let tmp = 13 - THIS_DAY;
+    remnantThisDayDays = tmp;
   }
-//   console.log(standardDay);
-
-  console.log(standardYear+standardMonth+standardDay)
+  let remnantNextDayDays = NEXT_DAY;
+  const standardDay = remnantThisDayDays + remnantNextDayDays;
+  //
+  console.log(standardYear+standardMonth+standardDay);
 });
