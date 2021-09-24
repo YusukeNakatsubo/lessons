@@ -27,7 +27,7 @@ reader.on('close', () => {
   } else if (THIS_YEAR % 4 === 0) {
     NEXY_YEAR = THIS_YEAR + 1;
   } else {
-    return;
+    NEXY_YEAR = THIS_YEAR;
   }
   const DAYS_PER_YEAR = (15 * 6) + (13 * 7);
   const standardYear = (NEXY_YEAR - (THIS_YEAR + 1)) * DAYS_PER_YEAR;
