@@ -1,4 +1,4 @@
-// This code has a 50% pass rate. why?
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -10,54 +10,57 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  const THIS = lines[0].split(/\s/).map(Number);
-  const THIS_YEAR = Number(THIS[0]);
-  const THIS_MONTH = Number(THIS[1]);
-  const THIS_DAY = Number(THIS[2]);
+  const START = lines[0].split(/\s/).map(Number),
+        START_YEAR = Number(START[0]),
+        START_MONTH = Number(START[1]),
+        START_DAY = Number(START[2]);
+  const OPEN = lines[1].split(/\s/).map(Number),
+        OPEN_MONTH = Number(OPEN[0]),
+        OPEN_DAY = Number(OPEN[1]);
   //
-  const NEXT = lines[1].split(/\s/).map(Number);
-  const NEXT_MONTH = Number(NEXT[0]);
-  const NEXT_DAY = Number(NEXT[1]);
-  //
-  let NEXY_YEAR = 0;
-  if (THIS_YEAR % 4 === 2) {
-    NEXY_YEAR = THIS_YEAR + 3;
-  } else if (THIS_YEAR % 4 === 3) {
-    NEXY_YEAR = THIS_YEAR + 2;
-  } else if (THIS_YEAR % 4 === 0) {
-    NEXY_YEAR = THIS_YEAR + 1;
-  } else {
-    NEXY_YEAR = THIS_YEAR;
-  }
-  const DAYS_PER_YEAR = (15 * 6) + (13 * 7);
-  const standardYear = (NEXY_YEAR - (THIS_YEAR + 1)) * DAYS_PER_YEAR;
-  //
-  let remnantThisMonth = 13 - THIS_MONTH;
-  let remnantThisMonthDays = 0;
-  if (remnantThisMonth % 2 === 0) {
-    let tmp = remnantThisMonth / 2
-    remnantThisMonthDays = (15 * tmp) + (13 * tmp);
-  } else {
-    let tmp = Math.floor(remnantThisMonth / 2);
-    remnantThisMonthDays = (15 * tmp) + (13 * tmp) + 13;
+  let OPEN_YEAR;
+  if (START_YEAR % 4 === 0) {
+    OPEN_YEAR = START_YEAR + 1;
+  } else if (START_YEAR % 4 === 2) {
+    OPEN_YEAR = START_YEAR + 3;
+  } else if (START_YEAR % 4 === 3) {
+    OPEN_YEAR = START_YEAR + 2;
   }
   //
-  let remnantNextMonth = NEXT_MONTH;
-  let remnantNextMonthDays = 0;
-  let remnantNextMonthTmp = Math.floor(remnantNextMonth / 2);
-  remnantNextMonthDays = (15 * remnantNextMonthTmp) + (13 * remnantNextMonthTmp);
-  const standardMonth = remnantThisMonthDays + remnantNextMonthDays;
-  //
-  let remnantThisDayDays = 0;
-  if (THIS_MONTH % 2 === 0) {
-    let tmp = 15 - THIS_DAY;
-    remnantThisDayDays = tmp;
-  } else {
-    let tmp = 13 - THIS_DAY;
-    remnantThisDayDays = tmp;
+  const getRange = (from, to) => {
+    let newArray = [];
+    for(let i = from; i <= to; i += 1) { newArray.push(i); }
+    return newArray;
   }
-  let remnantNextDayDays = NEXT_DAY;
-  const standardDay = remnantThisDayDays + remnantNextDayDays;
   //
-  console.log(standardYear+standardMonth+standardDay);
+  let remenantDaysStartMonth = 0;
+  let remenantStartYearDays = 0;
+  if (START_MONTH % 2 !== 0) { // odd
+    remenantDaysStartMonth = 13 - START_DAY;
+    let countOdd = getRange(START_MONTH,13).filter(x => x % 2 !== 0).length - 1;
+    let countEven = getRange(START_MONTH,13).filter(x => x % 2 === 0).length;
+    remenantStartYearDays = countOdd * 13 + countEven * 15 + remenantDaysStartMonth;
+  } else { // even
+    remenantDaysStartMonth = (15 - START_DAY);
+    let countOdd = getRange(START_MONTH,13).filter(x => x % 2 !== 0).length;
+    let countEven = getRange(START_MONTH,13).filter(x => x % 2 === 0).length - 1;
+    remenantStartYearDays = countOdd * 13 + countEven * 15 +   remenantDaysStartMonth;
+  }
+  //
+  let remenantOpenYearDays = 0;
+  if (OPEN_MONTH % 2 !== 0) { // odd
+    let countOdd = getRange(1,OPEN_MONTH).filter(x => x % 2 !== 0).length - 1;
+    let countEven = getRange(1,OPEN_MONTH).filter(x => x % 2 === 0).length;
+    remenantOpenYearDays = countOdd * 13 + countEven * 15 + OPEN_DAY;
+  } else { // even
+    let countOdd = getRange(1,OPEN_MONTH).filter(x => x % 2 !== 0).length;
+    let countEven = getRange(1,OPEN_MONTH).filter(x => x % 2 === 0).length - 1;
+    remenantOpenYearDays = countOdd * 13 + countEven * 15 + OPEN_DAY;
+  }
+  //
+  if ((OPEN_YEAR - START_YEAR) === 1) {
+    console.log(remenantOpenYearDays + remenantStartYearDays);
+  } else {
+    console.log((15 * 6 + 13 * 7) * ((OPEN_YEAR - START_YEAR) - 1) + remenantStartYearDays + remenantOpenYearDays);
+  }
 });
