@@ -41,8 +41,8 @@ reader.on('close', () => {
   }
   //
   let bookListRank = []
-  let sort_target = 'bookPrice';
-  bookListRank = memberList.sort((a, b) => b[sort_target] - a[sort_target]);
+  let sortTarget = 'bookPrice';
+  bookListRank = memberList.sort((a, b) => b[sortTarget] - a[sort_target]);
   //
   for (let rank in bookListRank) {
     console.log(bookListRank[rank]['personName']);
