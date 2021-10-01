@@ -18,3 +18,9 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Ar
 
 Object.prototype.hasOwnProperty()
 https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+
+分割代入
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+
+Array.prototype.splice()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
