@@ -18,18 +18,11 @@ reader.on('close', () => {
     let tmpSystem = tmp[0];
     let tmpTotalScore  = 0,
         tmpSystemScore = 0;
-    for (let j = 1; j <= 5; j += 1) {
-      tmpTotalScore += Number(tmp[j]);
-    }
-    if (tmpSystem === 's') {
-       tmpSystemScore = Number(tmp[2]) + Number(tmp[3]);
-    } else {
-       tmpSystemScore = Number(tmp[4]) + Number(tmp[5]);
-    }
     //
-    if (tmpTotalScore >= 350 && tmpSystemScore >= 160) {
-      result += 1;
-    }
+    for (let j = 1; j <= 5; j += 1) { tmpTotalScore += Number(tmp[j]); }
+    tmpSystem === 's' ? tmpSystemScore = Number(tmp[2]) + Number(tmp[3]) : tmpSystemScore = Number(tmp[4]) + Number(tmp[5]);
+    //
+    if (tmpTotalScore >= 350 && tmpSystemScore >= 160) { result += 1; }
   }
   console.log(result);
 });
