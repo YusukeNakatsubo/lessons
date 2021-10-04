@@ -18,8 +18,7 @@ reader.on('close', () => {
       amountCounter = 0,
       actionCounter = 0;
   for (let i = 0; i < COUNT; i += 1) {
-    let tmpHour, tmpTime, tmpAmount;
-    [tmpHour, tmpTime, tmpAmount] = INPUTS[i+2].split(/\s/).map(Number);
+    let [tmpHour, tmpTime, tmpAmount] = INPUTS[i+2].split(/\s/).map(Number);
     if (tmpHour !== hourCounter) {
       // 行動回数のカウンターを進める
       actionCounter = actionCounter + Math.ceil(amountCounter / POWER);
