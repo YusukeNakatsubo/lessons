@@ -16,11 +16,7 @@ reader.on('close', () => {
     let tmp = INPUTS[i+1].split(/\s/).map(Number);
     let tmpResult = [];
     for (let j = 0; j < WIDTH; j += 1) {
-      if (tmp[j] >= 128) {
-        tmpResult.push(1);
-      } else {
-        tmpResult.push(0);
-      }
+      tmp[j] >= 128 ? tmpResult.push(1) : tmpResult.push(0);
     }
     console.log(tmpResult.join(' '));
   }
