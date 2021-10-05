@@ -15,16 +15,16 @@ reader.on('close', () => {
         MACHINE_COUNT = INPUT[0],
         SWEETS_COUNT  = INPUT[1];
   let sweetsCount  = SWEETS_COUNT,
-      machineCount = 0,
+      machine      = 0,
       machineIndex = 0;
   for (let i = 0; i < MACHINE_COUNT; i += 1) {
-    let tmpMachineCount = Number(INPUTS[i+1]);
-    if (SWEETS_COUNT % tmpMachineCount < sweetsCount) {
-      sweetsCount = sweetsCount % tmpMachineCount;
-      machineCount = tmpMachineCount;
+    let tmpMachine = Number(INPUTS[i+1]);
+    if (SWEETS_COUNT % tmpMachine < sweetsCount) {
+      sweetsCount = sweetsCount % tmpMachine;
+      machine = tmpMachine;
       machineIndex = i + 1;
-    } else if (SWEETS_COUNT % tmpMachineCount === sweetsCount && machineCount < tmpMachineCount) {
-      machineCount = tmpMachineCount;
+    } else if (SWEETS_COUNT % tmpMachine === sweetsCount && machineCount < tmpMachine) {
+      machine = tmpMachineCount;
       machineIndex = i + 1;
     }
   }
