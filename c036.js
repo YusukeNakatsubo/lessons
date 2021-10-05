@@ -20,16 +20,21 @@ reader.on('close', () => {
       entryA2 = ENTRY_A[1] - 1,
       entryB1 = ENTRY_B[0] - 1,
       entryB2 = ENTRY_B[1] - 1;
-  if (ROUND1[entryA1] < ROUND1[entryA2]) {
+  let entryA1Value = ROUND1[entryA1],
+      entryA2Value = ROUND1[entryA2],
+      entryB1Value = ROUND1[entryB1],
+      entryB2Value = ROUND1[entryB2];
+  if (entryA1Value < entryA2Value) {
     roundAWinner = ENTRY_A[0];
   } else {
     roundAWinner = ENTRY_A[1];
   }
-  if (ROUND1[entryB1] < ROUND1[entryB2]) {
+  if (entryB1Value < entryB2Value) {
     roundBWinner = ENTRY_B[0];
   } else {
     roundBWinner = ENTRY_B[1];
   }
+  //
   let entryF1Value, entryF2Value;
   if (entryF1Value < entryF2Value) {
     entryF1Value = ROUND2[0];
@@ -38,6 +43,7 @@ reader.on('close', () => {
     entryF1Value = ROUND2[1];
     entryF2Value = ROUND2[0];
   }
+  //
   let winner, subWinner;
   if (entryF1Value < entryF2Value) {
     winner = roundAWinner;
