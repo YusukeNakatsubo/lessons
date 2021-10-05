@@ -1,4 +1,4 @@
-// This is a code with a 80% pass rate. Why?
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -25,5 +25,6 @@ reader.on('close', () => {
     return ('0' + number).slice(-2);
   }
   if (countTime < 10) { countTime = digestNumber(countTime); }
+  if (countDate < 10) { countDate = digestNumber(countDate); }
   console.log(`${tmpDate[0]}/${countDate} ${countTime}:${tmpTime[1]}`);
 });
