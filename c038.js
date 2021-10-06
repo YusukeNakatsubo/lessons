@@ -10,7 +10,7 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  // 理解するのに時間がかかった、100%の通過率にならない
+  // 100%の通過率にならない
   const INPUTS        = lines,
         INPUT         = INPUTS[0].split(/\s/).map(Number),
         MACHINE_COUNT = INPUT[0],
