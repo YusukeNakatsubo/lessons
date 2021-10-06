@@ -11,14 +11,12 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const INPUT = lines[0].split(/\+/);
-  let result = [];
+  let result = 0;
   for (let i = 0; i < INPUT.length; i += 1) {
-    let tmp          = INPUT[i],
-        slashCount   = (tmp.match(/\//g) || [] ).length,
-        bracketCount = (tmp.match(/</g) || [] ).length,
-        tmpNumberStr = String(bracketCount) + String(slashCount),
-        tmpNumberNum = Number(tmpNumberStr);
-    result.push(tmpNumberNum);
+    let slashCount   = (INPUT[i].match(/\//g) || [] ).length,
+        bracketCount = (INPUT[i].match(/</g) || [] ).length,
+        tmpSum       = bracketCount * 10 + slashCount;
+    result += tmpSum;
   }
-  console.log(result.reduce((a,b) => { return a + b }, 0));
+  console.log(result);
 });
