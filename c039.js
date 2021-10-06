@@ -13,8 +13,8 @@ reader.on('close', () => {
   const INPUT = lines[0].split(/\+/);
   let result = 0;
   for (let i = 0; i < INPUT.length; i += 1) {
-    let slashCount   = (INPUT[i].match(/\//g) || [] ).length,
-        bracketCount = (INPUT[i].match(/</g) || [] ).length,
+    let slashCount   = (INPUT[i].match(/\//g) || []).length,
+        bracketCount = (INPUT[i].match(/</g) || []).length,
         tmpSum       = bracketCount * 10 + slashCount;
     result += tmpSum;
   }
