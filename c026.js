@@ -10,11 +10,10 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  const INPUTS = lines;
-  const [COUNT, STANDARD_VALUE, ALLOWABLE_EROOR] = lines[0].split(/\s/).map(Number);
-  //
-  let carrotsWeight = 0;
-  let carrotsIndex = 0;
+  const INPUTS = lines,
+        [COUNT, STANDARD_VALUE, ALLOWABLE_EROOR] = INPUTS[0].split(/\s/).map(Number);
+  let carrotsWeight = 0,
+      carrotsIndex  = 0;
   for (let i = 0; i < COUNT; i += 1) {
     let [tmpWeight, tmpSuger] = INPUTS[i+1].split(/\s/).map(Number);
     if (STANDARD_VALUE - ALLOWABLE_EROOR <= tmpSuger && tmpSuger <= STANDARD_VALUE + ALLOWABLE_EROOR) {
@@ -24,10 +23,5 @@ reader.on('close', () => {
       }
     }
   }
-  //
-  if (carrotsWeight > 0) {
-    console.log(carrotsIndex);
-  } else {
-    console.log('not found');
-  }
+  carrotsWeight > 0 ? console.log(carrotsIndex) : console.log('not found');
 });
