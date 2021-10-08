@@ -10,7 +10,7 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  const INPUTS = lines;
+  const INPUTS = lines,
         COUNT  = INPUTS[0];
   let result = 0;
   for (let i = 0; i < COUNT; i += 1) {
