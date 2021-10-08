@@ -10,8 +10,8 @@ reader.on('line', (line) => {
   lines.push(line);
 });
 reader.on('close', () => {
-  const INPUTS = lines;
-  const [HEIGHT, WIDTH] = INPUTS[0].split(/\s/).map(Number);
+  const INPUTS          = lines,
+        [HEIGHT, WIDTH] = INPUTS[0].split(/\s/).map(Number);
   for (let i = 0; i < HEIGHT; i += 1) {
     let tmp = INPUTS[i+1].split(/\s/).map(Number);
     let tmpResult = [];
