@@ -1,4 +1,4 @@
-// This is a code with a 100% pass rate. why?
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
