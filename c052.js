@@ -14,5 +14,4 @@ reader.on('close', () => {
         [HEIGHT, WIDTH]          = INPUTS[0].split(/\s/).map(Number);
         [X_POSITION, Y_POSITION] = INPUTS[1].split(/\s/).map(Number);
   console.log((WIDTH * Math.abs(X_POSITION)) + (HEIGHT * Math.abs(Y_POSITION)) - (Math.abs(X_POSITION) * Math.abs(Y_POSITION)));
-
 });
