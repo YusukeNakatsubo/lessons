@@ -22,7 +22,7 @@ reader.on('close', () => {
     newNumbers = NUMBERS.map(Number);
   }
   if (newNumbers.includes(0) === true) {
-    maxNumber = Math.max(...newNumbers);
+    maxNumber = newNumbers.reduce((a,b) => Math.max(a, b));
     newNumbers = newNumbers.filter(item => item !== maxNumber);
   }
   let calculateNumbers = newNumbers.reduce((a,b) => { return a + b });
