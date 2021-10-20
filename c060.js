@@ -11,7 +11,7 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const INPUTS = lines,
-        [WORD_COUNT, PAGE_MAX_COUNT, PAGE_NUMBER] = INPUTS[0].split(/\s/).map(Number);
+        [WORD_COUNT, PAGE_MAX_COUNT, PAGE_NUMBER] = INPUTS[0].split(/\s/).map(Number),
         WORDS = INPUTS[1].split(/\s/).map(String);
   let basicDictionary = WORDS.sort();
   let newDictionary = [];
