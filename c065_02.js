@@ -21,11 +21,9 @@ reader.on('close', () => {
         tmpNumber = Number(tmp[1]);
     if (tmpString === '>') {
       tmpResult = result.filter((value) => { return value > tmpNumber });
-    }
-    if (tmpString === '<') {
+    } else if (tmpString === '<') {
       tmpResult = result.filter((value) => { return value < tmpNumber });
-    }
-    if (tmpString === '/') {
+    } else if (tmpString === '/') {
       tmpResult = result.filter((value) => { return value % tmpNumber === 0 });
     }
     result = tmpResult;
