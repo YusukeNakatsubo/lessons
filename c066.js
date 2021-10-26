@@ -22,8 +22,6 @@ reader.on('close', () => {
     if (totalPoyWeight[counter] > 0) {
       result += 1;
     } else {
-      console.log(totalPoyWeight[counter] <= 0);
-      console.log(counter < POY_COUNT - 1);
       // I don't know how to write syntax.
       counter += (totalPoyWeight[counter] <= 0) * (counter < POY_COUNT - 1);
       totalPoyWeight[counter] -= tmpFishWeight;
@@ -31,8 +29,6 @@ reader.on('close', () => {
         result += 1;
       }
     }
-    console.log(counter);
-    console.log('----------');
   }
   console.log(result);
 });
