@@ -15,13 +15,13 @@ reader.on('close', () => {
         KAME_SPEED = Number(INPUTS[2]);
   let usagiHandicapTime = 0;
   DISATNCE % HANDICAP_DISTANCE === 0
-  ? usagiHandicapTime = (Math.floor(DISATNCE / HANDICAP_DISTANCE) - 1) * HANDICAP_TIME
-  : usagiHandicapTime = (Math.floor(DISATNCE / HANDICAP_DISTANCE)) * HANDICAP_TIME;
-  const usagiTime = DISATNCE * USAGI_SPEED + usagiHandicapTime;
-  const kameTime  = DISATNCE * KAME_SPEED;
-  if (usagiTime < kameTime) {
+  ? usagiHandicapTime = (Math.floor(DISATNCE / HANDICAP_DISTANCE) - 1) * HANDICAP_TIME // even
+  : usagiHandicapTime = (Math.floor(DISATNCE / HANDICAP_DISTANCE)) * HANDICAP_TIME; // odd
+  const USAGI_TIME = DISATNCE * USAGI_SPEED + usagiHandicapTime;
+  const KAME_TIME  = DISATNCE * KAME_SPEED;
+  if (USAGI_TIME < KAME_TIME) {
     console.log('USAGI');
-  } else if (usagiTime > kameTime) {
+  } else if (USAGI_TIME > KAME_TIME) {
     console.log('KAME');
   } else {
     console.log('DRAW');
