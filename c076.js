@@ -73,7 +73,7 @@ reader.on('close', () => {
         midnightWorkTime = 1; // 1時間
       }
     }
-    // 開始時間が23
+    // 開始時間が22
     if (tmpStartTime >= 22 && tmpEndTime <= 23) {
       midnightWorkTime = 1; // 1時間
     }
