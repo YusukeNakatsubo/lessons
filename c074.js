@@ -11,7 +11,7 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const INPUTS = lines,
-        [HEIGHT, WIDTH , NEW_WIDTH] = INPUTS[0].split(/\s/).map(Number);
+        [HEIGHT, WIDTH, NEW_WIDTH] = INPUTS[0].split(/\s/).map(Number);
   let strings = '';
   for (let i = 0; i < HEIGHT; i += 1) {
     strings += INPUTS[i + 1];
