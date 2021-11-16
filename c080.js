@@ -17,9 +17,10 @@ reader.on('close', () => {
   let goodCount = 0,
       badCount  = 0;
   for (let i = 0; i < GAME_COUNT; i += 1) {
-    let tmp = (i + 1) % BTN_COUNT;
-    if (tmp === 0) { tmp = BTN_COUNT; }
-    PUSH_BTNS[i] === tmp ? goodCount += 1 : badCount += 1;
+    // これは思いつかなかった・・・
+    let btnNumber = (i + 1) % BTN_COUNT;
+    if (btnNumber === 0) { btnNumber = BTN_COUNT; }
+    PUSH_BTNS[i] === btnNumber ? goodCount += 1 : badCount += 1;
   }
   badCount >= JUDGE_COUNT ? console.log('-1') : console.log(goodCount * 1000);
 });
