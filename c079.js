@@ -17,9 +17,7 @@ reader.on('close', () => {
   for (let i = 0; i < COUNT; i += 1) {
     if (cardType.length === TYPE) { break; }
     let tmp = Number(INPUTS[i + 1]);
-    if (cardType.includes(tmp) === false) {
-      cardType.push(tmp);
-    }
+    if (cardType.includes(tmp) === false) { cardType.push(tmp); }
     counter += 1;
   }
   cardType.length === TYPE ? console.log(counter) : console.log('unlucky');
