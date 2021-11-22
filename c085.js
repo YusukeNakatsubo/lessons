@@ -13,7 +13,7 @@ reader.on('close', () => {
   const INPUTS = lines,
         INPUT_NUMBER = INPUTS[0].split(/\s/),
         INPUT_STRING = INPUTS[1].split('');
-  const ALPABET_ARRAY = [...Array(26)].map((a, b) => (10 + b).toString(36));
+  const ALPABET_ARRAY = [...Array(26)].map((_, b) => (10 + b).toString(36));
   let keyDurableArray = [];
   for (let i = 0; i < 26; i += 1) { keyDurableArray.push([ALPABET_ARRAY[i], INPUT_NUMBER[i]]); }
   let result = [];
