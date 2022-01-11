@@ -18,5 +18,5 @@ reader.on('close', () => {
     else if (tmpNumber % NUMBER_X === 0) console.log('A');
     else if (tmpNumber % NUMBER_Y === 0) console.log('B');
     else console.log('N');
-  } 
+  }
 });
