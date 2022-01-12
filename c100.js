@@ -1,4 +1,4 @@
-// 全然解けない、発想の転換が必要そう...
+// ランタイムエラーで突破できない.発想の転換が必要そう...
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 // 自分の得意な言語で
@@ -13,8 +13,8 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const INPUTS = lines,
-        [MUSIC_LIST, OWNERSHIP_TIME_HOUR, OWNERSHIP_TIME_MINUTE] = INPUTS[0].split(/\s/).map(Number);
-  let playableTime = OWNERSHIP_TIME_HOUR * 60 + OWNERSHIP_TIME_MINUTE,
+        [MUSIC_LIST, OWNERSHIP_TIME_MINUTE, OWNERSHIP_TIME_SECOND] = INPUTS[0].split(/\s/).map(Number);
+  let playableTime = OWNERSHIP_TIME_MINUTE * 60 + OWNERSHIP_TIME_SECOND,
       musicTimeList = [];
   // 組み合わせを生成する 
   const combinationFunc = (number, factor) => {
@@ -35,23 +35,28 @@ reader.on('close', () => {
     return answer;
   }
   const sumFunc = (targetAry) => targetAry.reduce((a, b) => a + b, 0);
+  const searchMaxValueFunc = (a, b) => { return Math.max(a, b); }
   for (let i = 0; i < MUSIC_LIST; i += 1) {
-    let [tmpMusicHour, tmpMusicMinute] = INPUTS[i + 1].split(/\s/).map(Number),
-        tmpMusicTime = tmpMusicHour * 60 + tmpMusicMinute;
+    let [tmpMusicMinute, tmpMusicSecond] = INPUTS[i + 1].split(/\s/).map(Number),
+        tmpMusicTime = tmpMusicMinute * 60 + tmpMusicSecond;
     musicTimeList.push(tmpMusicTime);
   }
   // 組み合わせの中から最大値を探す
   let resultTime = [musicTimeList];
+  let judgeCounter = 0;
   for (let i = 2; i <= MUSIC_LIST; i += 1) {
+    // if (resultTime[i - 2].reduce(searchMaxValueFunc) > playableTime) break;
     let tmpCombination = combinationFunc(musicTimeList, i);
         tmpResultTime = [];
+    console.log(tmpCombination);
     for (let j = 0; j < tmpCombination.length; j += 1) {
       let tmpSumTime = sumFunc(tmpCombination[j]);
-      if(tmpSumTime <= playableTime) tmpResultTime.push(tmpSumTime);
+      // 演奏時間を超える値は除外
+      if (tmpSumTime <= playableTime) tmpResultTime.push(tmpSumTime);
     }
     resultTime.push(tmpResultTime);
   }
-  // 空配列を除き配列の要素数を出力する
+  //  空配列を除き配列の要素数を出力する
   let result = [];
   for (let i = 0; i < resultTime.length ; i += 1) {
     if (resultTime[i].length !== 0) result.push(resultTime[i]);
