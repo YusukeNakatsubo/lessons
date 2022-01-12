@@ -1,4 +1,4 @@
-// This is a code with a 100% pass rate.
+// This is a code with a 90% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -11,27 +11,22 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const INPUTS = lines,
-        [BUS_COUNT, DESIRED_TIME] = INPUTS[0].split(/\s/).map(Number);
-  let result = [];
-  for (let i = 0; i < BUS_COUNT; i += 1) {
-    let tmpTime   = Number(INPUTS[i + 1]),
-        tmpResult = Math.abs(DESIRED_TIME - tmpTime);
-    if (result.length === 0) { result.push(tmpTime); }
-    if (result.length !== 0) {
-      let compareTime   = result.slice(- 1)[0],
-          compareResult = Math.abs(DESIRED_TIME - compareTime);
-      if (compareResult > tmpResult) {
-        let removeValue = [];
-        removeValue.push(compareTime);
-        result = result.filter((value) => {
-          return ! removeValue.includes(value);
-        })
-        result.push(tmpTime);
-      } else if (compareResult === tmpResult) {
-        result.push(tmpTime);
-      }
+        COUNT  = Number(lines[0]);
+  let result = 'OK';
+  for (let i = 0; i < COUNT - 1; i += 1) {
+    let tmpA = INPUTS[i + 1].split(/\s/).map(Number),
+        tmpB = INPUTS[i + 2].split(/\s/).map(Number);
+    let tmpHolidayA = [],
+        tmpHolidayB = [];
+    for (let j = tmpA[0]; j < tmpA[1]; j += 1) { tmpHolidayA.push(j); }
+    for (let j = tmpB[0]; j < tmpB[1]; j += 1) { tmpHolidayB.push(j); }
+    const getIsDuplicate = (arr1, arr2) => {
+      return [...arr1, ...arr2].filter(item => arr1.includes(item) && arr2.includes(item)).length > 0
+    }
+    if (getIsDuplicate(tmpHolidayA, tmpHolidayB) === false) {
+      result = 'NG';
+      break;
     }
   }
-  const output = [...new Set(result)].sort();
-  console.log(output.join('\n'));
+  console.log(result);
 });
