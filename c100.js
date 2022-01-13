@@ -33,7 +33,6 @@ reader.on('close', () => {
     return answer;
   }
   const sumFunc = (targetAry) => targetAry.reduce((a, b) => a + b, 0);
-  const searchMaxValueFunc = (a, b) => { return Math.max(a, b); }
   for (let i = 0; i < MUSIC_LIST; i += 1) {
     let [tmpMusicMinute, tmpMusicSecond] = INPUTS[i + 1].split(/\s/).map(Number),
         tmpMusicTime = tmpMusicMinute * 60 + tmpMusicSecond;
