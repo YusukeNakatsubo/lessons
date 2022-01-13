@@ -46,7 +46,7 @@ reader.on('close', () => {
     for (let j = 0; j < tmpCombination.length; j += 1) {
       let tmpSumTime = sumFunc(tmpCombination[j]);
       // 演奏時間を超える値は除外
-      if (tmpSumTime <= playableTime) tmpResultTime.push(tmpSumTime)
+      if (tmpSumTime <= playableTime) tmpResultTime.push(tmpSumTime);
     }
     if (tmpResultTime.length === 0) break;
     resultTime.push(tmpResultTime);
