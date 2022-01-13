@@ -1,4 +1,4 @@
-// ランタイムエラーで突破できない.発想の転換が必要そう...
+// ランタイムエラーが発生、発想を転換する必要がある...
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -14,7 +14,7 @@ reader.on('close', () => {
         [MUSIC_LIST, OWNERSHIP_TIME_MINUTE, OWNERSHIP_TIME_SECOND] = INPUTS[0].split(/\s/).map(Number);
   let playableTime = OWNERSHIP_TIME_MINUTE * 60 + OWNERSHIP_TIME_SECOND,
       musicTimeList = [];
-  // 組み合わせを生成する -> 再帰関数によりランタイムエラーが発生？
+  // 組み合わせを生成する
   const combinationFunc = (number, factor) => {
     let answer = [];
     if (number.length < factor) return [];
