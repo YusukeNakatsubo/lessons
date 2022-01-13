@@ -15,6 +15,7 @@ reader.on('close', () => {
   let counter = 0;
   for (let i = 0; i < YEAR_ARY.length; i += 1) {
     if (YEAR_ARY[i].includes(LUCKY_NUMBER) === true) counter += 1;
+    // 0 ≦ X ≦ 364 Why?
     if (LUCKY_NUMBER === '365') counter += 1;
   }
   console.log(counter);
