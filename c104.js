@@ -11,7 +11,7 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const [NUMBER_A, NUMBER_B] = lines[0].split(/\s/).map(String);
-  
+
   const NUMBER_ARR = [...Array(10).keys()];
   const combinationNumber = (number, factor) => {
     let answer = [];
