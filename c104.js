@@ -1,4 +1,4 @@
-// This is a code with a 80% pass rate. Why?
+// This is a code with a 90% pass rate. Why?
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -38,9 +38,20 @@ reader.on('close', () => {
     let numberX  = COMBINATION_NUMBER_ARR[i][0],
         numberY  = COMBINATION_NUMBER_ARR[i][1],
         numberXY = Number(String(numberX) + String(numberY));
-    let tmpEquation = numberXY * numberY,
-        tmpAnswer   = Number(NUMBER_A + String(numberX) + NUMBER_B);
-    if (tmpEquation === tmpAnswer) flagArr.push(numberX, numberY);
+    if (numberX !== 0) {
+      let tmpEquation = numberXY * numberY,
+          tmpAnswer   = Number(NUMBER_A + String(numberX) + NUMBER_B);
+      if (tmpEquation === tmpAnswer) flagArr.push(numberX, numberY);
+    }
+    // ここをうまく関数化できないか
+    numberX  = COMBINATION_NUMBER_ARR[i][1],
+    numberY  = COMBINATION_NUMBER_ARR[i][0],
+    numberXY = Number(String(numberX) + String(numberY));
+    if (numberX !== 0) {
+      let tmpEquation = numberXY * numberY,
+          tmpAnswer   = Number(NUMBER_A + String(numberX) + NUMBER_B);
+      if (tmpEquation === tmpAnswer) flagArr.push(numberX, numberY);
+    }
   }
 
   flagArr.length !== 0 ? console.log(flagArr.join(' ')) : console.log('No');
