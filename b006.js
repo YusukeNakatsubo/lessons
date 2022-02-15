@@ -18,10 +18,10 @@ reader.on('close', () => {
         HIGH_HEIGHT = Y + A * 0.5,
         LOW_HEIGHT = Y - A * 0.5;
 
-  let result = O_Y + (X * Math.tan(R)) - (G * Math.pow(X, 2)) / (2 * Math.pow(S, 2) * Math.pow(Math.cos(R), 2)),
-      flag = -1;
-  if (result <= HIGH_HEIGHT && result >= Y) flag = result - Y;
-  else if (result < Y && result >= LOW_HEIGHT) flag = Y - result;
+  const RESULT = O_Y + (X * Math.tan(R)) - (G * Math.pow(X, 2)) / (2 * Math.pow(S, 2) * Math.pow(Math.cos(R), 2));
+  let   flag = -1;
+  if (RESULT <= HIGH_HEIGHT && RESULT >= Y) flag = RESULT - Y;
+  else if (RESULT < Y && RESULT >= LOW_HEIGHT) flag = Y - RESULT;
 
   flag >= 0 ? console.log(`Hit ${Math.abs(Math.round(flag * 10) / 10)}`) : console.log('Miss');
 });
