@@ -19,7 +19,7 @@ reader.on('close', () => {
         LOW_HEIGHT = Y - A * 0.5;
 
   const RESULT = O_Y + (X * Math.tan(R)) - (G * Math.pow(X, 2)) / (2 * Math.pow(S, 2) * Math.pow(Math.cos(R), 2));
-  let   flag = -1;
+  let flag = -1;
   if (RESULT <= HIGH_HEIGHT && RESULT >= Y) flag = RESULT - Y;
   else if (RESULT < Y && RESULT >= LOW_HEIGHT) flag = Y - RESULT;
 
