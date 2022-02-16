@@ -1,4 +1,4 @@
-// b009
+// This is a code with a 80% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
