@@ -20,53 +20,57 @@ reader.on('close', () => {
   }
 
   let hourCounter     = 10,
-      minuteCounter   = 0,
+      miniteCounter   = 0,
       startTimeHour   = 0,
-      startTimeMinute = 0,
+      startTimeMinite = 0,
       endTimeHour     = 0,
       endTimeMinite   = 0;
   for (let i = 0; i < COUNT; i += 1) {
     let userName = userInfoArr[i][0],
         userTime = userInfoArr[i][1];
 
+    // 開始時間の設定
+    startTimeMinite = miniteCounter;
     startTimeHour   = hourCounter;
-    endTimeHour     = hourCounter;
-    startTimeMinute = minuteCounter;
-    endTimeMinite   = startTimeMinute + userTime;
+    // 終了時間の設定
+    endTimeMinite   = startTimeMinite + userTime;
+    endTimeHour     = startTimeHour;
     if (endTimeMinite >= 60) {
-      endTimeHour   += 1;
       endTimeMinite -= 60;
+      endTimeHour   += 1;
     }
 
-    // 12時を超える場合の処理
+    // 昼休憩の処理
+    // 開始時間は休憩時間が足されている 終了時間は休憩時間が足されている
     if (startTimeHour === 12 || endTimeHour === 12) {
-      startTimeMinute -= 10;
+      // 開始時間と終了時間を調整する
+      startTimeMinite -= 10;
       endTimeMinite   -= 10;
-      // 60分休憩
-      if (startTimeMinute < 0) {
-        startTimeMinute += 60;
+      if (startTimeMinite < 0) {
+        startTimeMinite += 60;
         startTimeHour   -= 1;
       }
       if (endTimeMinite < 0) {
         endTimeMinite += 60;
         endTimeHour   -= 1;
       }
-      startTimeHour += 1;
-      endTimeHour   += 1;
+      // 昼休憩時間を調整する
+      startTimeHour += 1; // 一時間後
+      endTimeHour += 1;   // 一時間後
     }
 
-    // 出力
+    // 出力する
     const getdoubleDigestNumer = (number) => {
-      return ('0' + number).slice(-2)
+      return ('0' + number).slice(-2);
     }
-    console.log(`${startTimeHour}:${getdoubleDigestNumer(startTimeMinute)} - ${endTimeHour}:${getdoubleDigestNumer(endTimeMinite)} ${userName}`);
+    console.log(`${startTimeHour}:${getdoubleDigestNumer(startTimeMinite)} - ${endTimeHour}:${getdoubleDigestNumer(endTimeMinite)} ${userName}`);
 
-    // 10分休憩の処理
+    // 休憩時間を足す 次の順番へ回す
+    miniteCounter = endTimeMinite + 10;
     hourCounter   = endTimeHour;
-    minuteCounter = endTimeMinite + 10;
-    if (minuteCounter >= 60) {
-      hourCounter   = endTimeHour + 1;
-      minuteCounter = minuteCounter - 60;
+    if (miniteCounter >= 60) {
+      miniteCounter -= 60;
+      hourCounter   += 1;
     }
   }
 
