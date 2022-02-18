@@ -16,28 +16,28 @@ reader.on('close', () => {
         TEAM_B_POSITION_ARR = INPUTS[2].split(/\s/).map(Number);
 
   let passerNumber   = Number(PASSER_PLAYER_NUMBER) - 1,
-      passTeam       = TEAM_A_POSITION_ARR,
-      enemyTeam      = TEAM_B_POSITION_ARR,
+      passTeamArr    = TEAM_A_POSITION_ARR,
+      enemyTeamArr   = TEAM_B_POSITION_ARR,
       maxNumber      = 110,
       minNumber      = 55;
   if (PASSER_TEAM_NAME === 'B') {
-    passTeam  = TEAM_B_POSITION_ARR,
-    enemyTeam = TEAM_A_POSITION_ARR,
-    maxNumber = 55,
-    minNumber = 0;
+    passTeamArr  = TEAM_B_POSITION_ARR,
+    enemyTeamArr = TEAM_A_POSITION_ARR,
+    maxNumber    = 55,
+    minNumber    = 0;
   }
 
-  let passerPosition     = passTeam[passerNumber],
-      newTeamPositionArr = enemyTeam.sort((a, b) => a - b),
+  let passerPosition     = passTeamArr[passerNumber],
+      newTeamPositionArr = enemyTeamArr.sort((a, b) => a - b),
       counter            = 0;
   for (let i = 0; i < 11; i += 1) {
     if (PASSER_TEAM_NAME === 'A') {
-      if (passTeam[i] >= minNumber && passTeam[i] <= maxNumber && passTeam[i] > passerPosition && passTeam[i] > newTeamPositionArr[9]) {
+      if (passTeamArr[i] >= minNumber && passTeamArr[i] <= maxNumber && passTeamArr[i] > passerPosition && passTeamArr[i] > newTeamPositionArr[9]) {
         console.log(i + 1);
         counter += 1;
       }
     } else if (PASSER_TEAM_NAME === 'B') {
-      if (passTeam[i] <= maxNumber && passTeam[i] >= minNumber && passTeam[i] < passerPosition && passTeam[i] < newTeamPositionArr[1]) {
+      if (passTeamArr[i] <= maxNumber && passTeamArr[i] >= minNumber && passTeamArr[i] < passerPosition && passTeamArr[i] < newTeamPositionArr[1]) {
         console.log(i + 1);
         counter += 1;
       }
