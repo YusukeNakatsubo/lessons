@@ -15,11 +15,11 @@ reader.on('close', () => {
         TEAM_A_POSITION_ARR = INPUTS[1].split(/\s/).map(Number),
         TEAM_B_POSITION_ARR = INPUTS[2].split(/\s/).map(Number);
 
-  let passerNumber   = Number(PASSER_PLAYER_NUMBER) - 1,
-      passTeamArr    = TEAM_A_POSITION_ARR,
-      enemyTeamArr   = TEAM_B_POSITION_ARR,
-      maxNumber      = 110,
-      minNumber      = 55;
+  let passerNumber = Number(PASSER_PLAYER_NUMBER) - 1,
+      passTeamArr  = TEAM_A_POSITION_ARR,
+      enemyTeamArr = TEAM_B_POSITION_ARR,
+      maxNumber    = 110,
+      minNumber    = 55;
   if (PASSER_TEAM_NAME === 'B') {
     passTeamArr  = TEAM_B_POSITION_ARR,
     enemyTeamArr = TEAM_A_POSITION_ARR,
