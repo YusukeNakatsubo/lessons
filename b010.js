@@ -30,7 +30,7 @@ reader.on('close', () => {
   let passerPosition     = passTeamArr[passerNumber],
       newTeamPositionArr = enemyTeamArr.sort((a, b) => a - b),
       counter            = 0;
-  for (let i = 0; i < 11; i += 1) {
+  for (let i = 0; i < passTeamArr.length; i += 1) {
     if (PASSER_TEAM_NAME === 'A') {
       if (passTeamArr[i] >= minNumber && passTeamArr[i] <= maxNumber && passTeamArr[i] > passerPosition && passTeamArr[i] > newTeamPositionArr[9]) {
         console.log(i + 1);
