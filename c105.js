@@ -1,4 +1,4 @@
-// This is a code with a 90% pass rate.
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -22,12 +22,9 @@ reader.on('close', () => {
         currentCard  = newCardArr[i + 1];
 
     let difference = currentCard - previousCard;
-    if (difference !== 1) {
-      result += previousCard;
-    }
-
-    if (i === COUNT - 2) result += currentCard;
+    if (difference !== 1) result += previousCard;
   }
+  result += newCardArr.slice(-1)[0];
 
   console.log(result);
 });
