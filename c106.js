@@ -47,7 +47,8 @@ reader.on('close', () => {
   }
 
   for (let i = 0; i < COUNT; i += 1) {
-    if (Number(resultArr[i]) >= 0) resultArr[i] = 'N';
+    if (resultArr[i] === 'G' || resultArr[i] === 'S' || resultArr[i] === 'B') continue;
+    else resultArr[i] = 'N';
   }
 
   console.log(resultArr.join('\n'));
