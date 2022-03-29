@@ -19,7 +19,7 @@ reader.on('close', () => {
 
   const getMaxValue = (a, b) => Math.max(a, b);
   const replaceElement = (array, before, after) => {
-    for(var i = 0; i < array.length; i+= 1){
+    for(let i = 0; i < array.length; i += 1){
       array[i] = String(array[i]).replace(before, after);
     }
     return array;
