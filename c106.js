@@ -1,4 +1,4 @@
-// This is a code with a 80% pass rate.
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -14,42 +14,21 @@ reader.on('close', () => {
         COUNT  = Number(INPUTS[0]),
         SCORE_ARR = INPUTS[1].split(/\s/).map(Number);
 
-  let scoreArr  = SCORE_ARR.concat(),
-      resultArr = SCORE_ARR.concat();
+  let resultArr = Array(COUNT).fill(0);
 
-  const getMaxValue = (a, b) => Math.max(a, b);
-  const replaceElement = (array, before, after) => {
-    for(let i = 0; i < array.length; i += 1){
-      array[i] = String(array[i]).replace(before, after);
+  for (let i = 0; i < COUNT; i += 1) {
+    let counter = 1;
+    let compareNum = SCORE_ARR[i];
+    for (let j = 0; j < COUNT; j += 1) {
+      if (compareNum < SCORE_ARR[j]) counter += 1;
     }
-    return array;
-  }
-
-  let maxValueGold  = scoreArr.reduce(getMaxValue);
-  replaceElement(resultArr, maxValueGold, 'G');
-  let goldArr = scoreArr.filter((el) => { return el === maxValueGold });
-
-  let maxValueSilver,
-      silverCompareArr = [];
-  if (goldArr.length === 1) {
-    silverCompareArr = scoreArr.filter((el) => { return el !== maxValueGold });
-    maxValueSilver = silverCompareArr.reduce(getMaxValue);
-    replaceElement(resultArr, maxValueSilver, 'S');
-  }
-  let silverArr = silverCompareArr.filter((el) => { return el === maxValueSilver });
-
-  let maxValueBronze,
-      bronzeCompareArr = [];
-  if (goldArr.length === 1 && silverArr.length === 1) {
-    bronzeCompareArr = silverCompareArr.filter((el) => { return el !== maxValueSilver });
-    maxValueBronze = bronzeCompareArr.reduce(getMaxValue);
-    replaceElement(resultArr, maxValueBronze, 'B');
+    resultArr[i] = counter;
   }
 
   for (let i = 0; i < COUNT; i += 1) {
-    if (resultArr[i] === 'G' || resultArr[i] === 'S' || resultArr[i] === 'B') continue;
-    else resultArr[i] = 'N';
+    if (resultArr[i] === 1) console.log('G');
+    else if (resultArr[i] === 2) console.log('S');
+    else if (resultArr[i] === 3) console.log('B');
+    else console.log('N');
   }
-
-  console.log(resultArr.join('\n'));
 });
