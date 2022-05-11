@@ -11,9 +11,9 @@ reader.on('line', (line) => {
 });
 reader.on('close', () => {
   const DATA   = lines,
-  [X, Y] = DATA[0].split(/\s/).map(Number),
-  K      = Number(DATA[1]),
-  COUNT  = Number(DATA[2]);
+        [X, Y] = DATA[0].split(/\s/).map(Number),
+        K      = Number(DATA[1]),
+        COUNT  = Number(DATA[2]);
 
   let distancePointArr = [];
   for (let i = 0; i < COUNT; i += 1) {
