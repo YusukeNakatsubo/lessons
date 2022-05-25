@@ -1,3 +1,4 @@
+// This is a code with a 100% pass rate.
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
@@ -16,112 +17,87 @@ reader.on('close', () => {
   for (let i = 0; i < HEIGHT; i += 1) {
     gridArr.push(DATA[i + 1].split('').map(String));
   }
-//   console.log(gridArr);
 
-  let [initX, initY] = DATA[1 + HEIGHT].split(/\s/).map(Number);
-//   console.log(initY);
+  let [myPositionY, myPositionX] = DATA[1 + HEIGHT].split(/\s/).map(Number);
+  myPositionY -= 1;
+  myPositionX -= 1;
+
   const COUNT = Number(DATA[HEIGHT + 2]);
-
   let commandArr = [];
   for (let i = 0; i < COUNT; i += 1) {
-    commandArr.push(DATA[i + HEIGHT + 3]);
+    commandArr.push(String(DATA[i + HEIGHT + 3]));
   }
 
-  let myPosition = [initX - 1, initY - 1];
-  let moveX, moveY;
+  let flag = true;
   for (let i = 0; i < COUNT; i += 1) {
-    let operation = DATA[i + HEIGHT + 3];
-
-    if (operation === 'U') {
-      moveX = 0;
-      moveY = -1;
-    } else if (operation === 'R') {
-      moveX = 1;
-      moveY = 0;
-    } else if (operation === 'D') {
-      moveX = 0;
-      moveY = 1;
-    } else if (operation === 'L') {
-      moveX = -1;
-      moveY = 0;
+    if (commandArr[i] === 'U') {
+      while (flag) {
+        if (myPositionX - 1 >= 0) {
+          if (gridArr[myPositionX - 1][myPositionY] === '.') {
+            myPositionX--;
+            break;
+          }
+          else if (gridArr[myPositionX - 1][myPositionY] === '#') {
+            myPositionX--;
+          }
+        }
+        else {
+          break;
+        }
+      }
     }
-
-    while (gridArr[myPosition[0]][myPosition[1]] === '#') {
-      if (myPosition[0] + moveX < 0 ||
-          myPosition[1] + moveY < 0 ||
-          myPosition[0] + moveX > WIDTH ||
-          myPosition[1] + moveY > HEIGHT
-          ) break;
-      myPosition[0] += moveX;
-      myPosition[1] += moveY;
-      console.log('Hey');
+    else if (commandArr[i] === 'D') {
+      while (flag) {
+        if (myPositionX + 1 < HEIGHT) {
+          if (gridArr[myPositionX + 1][myPositionY] === '.') {
+            myPositionX++;
+            break;
+          }
+          else if (gridArr[myPositionX + 1][myPositionY] === '#') {
+            myPositionX++;
+          }
+        }
+        else {
+          break;
+        }
+      }
     }
-
-    console.log(myPosition);
+    else if (commandArr[i] === 'L') {
+      while (flag) {
+        if (myPositionY - 1 >= 0) {
+          if (gridArr[myPositionX][myPositionY - 1] === '.') {
+            myPositionY--;
+            break;
+          }
+          else if (gridArr[myPositionX][myPositionY - 1] === '#') {
+            myPositionY--;
+          }
+        }
+        else {
+          break;
+        }
+      }
+    }
+    else if (commandArr[i] === 'R') {
+      while (flag) {
+        if (myPositionY + 1 < WIDTH) {
+          if (gridArr[myPositionX][myPositionY + 1] === '.') {
+            myPositionY++;
+            break;
+          }
+          else if (gridArr[myPositionX][myPositionY + 1] === '#') {
+            myPositionY++;
+          }
+        }
+        else {
+          break;
+        }
+      }
+    }
   }
 
+  myPositionX += 1;
+  myPositionY += 1;
+
+  console.log(`${myPositionY} ${myPositionX}`);
 });
-
-
-
-
-// process.stdin.resume();
-// process.stdin.setEncoding('utf8');
-// // 自分の得意な言語で
-// // Let's チャレンジ！！
-// var lines = [];
-// var reader = require('readline').createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
-// reader.on('line', (line) => {
-//   lines.push(line);
-// });
-// reader.on('close', () => {
-//   const DATA = lines,
-//         [HEIGHT, WIDTH] = DATA[0].split(/\s/).map(Number);
-
-//   let gridArr = [];
-//   for (let i = 0; i < HEIGHT; i += 1) {
-//     gridArr.push(DATA[i + 1].split('').map(String));
-//   }
-// //   console.log(gridArr);
-
-//   let [initX, initY] = DATA[1 + HEIGHT].split(/\s/).map(Number);
-// //   console.log(initY);
-//   const COUNT = Number(DATA[HEIGHT + 2]);
-
-//   let myPosition = [initX - 1, initY - 1];
-//   let moveX, moveY;
-//   for (let i = 0; i < COUNT; i += 1) {
-//     let operation = DATA[i + HEIGHT + 3];
-
-//     if (operation === 'U') {
-//       moveX = 0;
-//       moveY = -1;
-//     } else if (operation === 'R') {
-//       moveX = 1;
-//       moveY = 0;
-//     } else if (operation === 'D') {
-//       moveX = 0;
-//       moveY = 1;
-//     } else if (operation === 'L') {
-//       moveX = -1;
-//       moveY = 0;
-//     }
-
-//     while (gridArr[myPosition[0]][myPosition[1]] === '#') {
-//       if (myPosition[0] + moveX < 0 ||
-//           myPosition[1] + moveY < 0 ||
-//           myPosition[0] + moveX > WIDTH ||
-//           myPosition[1] + moveY > HEIGHT
-//           ) break;
-//       myPosition[0] += moveX;
-//       myPosition[1] += moveY;
-//       console.log('Hey');
-//     }
-
-//     console.log(myPosition);
-//   }
-
-// });
