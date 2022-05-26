@@ -55,9 +55,7 @@ reader.on('close', () => {
   }
 //   console.log(resultArr);
 
-  let result = calcMinScore(resultArr);
-  let resultIndex = resultArr.indexOf(result);
-
-  console.log(resultIndex + 1);
+  let result = resultArr.indexOf(calcMinScore(resultArr)) + 1;
+  console.log(result);
 
 });
