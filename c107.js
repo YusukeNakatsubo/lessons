@@ -1,4 +1,5 @@
 // This is a code with a 50% pass rate.
+// pending
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 var lines = [];
